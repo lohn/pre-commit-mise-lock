@@ -1,0 +1,30 @@
+[tools]
+actionlint = "1"
+dprint = "0"
+node = "24"
+"npm:renovate" = "43"
+"pipx:commitizen" = "4"
+prek = "0.4"
+
+[settings]
+minimum_release_age = "3d"
+lockfile = true
+
+[tasks.test]
+description = "Run the bats suite across all supported bash versions"
+depends = ["test:bash32", "test:bash44", "test:bash53"]
+
+[tasks."test:bash32"]
+description = "Run the bats suite under bash 3.2 (macOS's bash)"
+dir = "{{config_root}}"
+run = "docker run --rm -v \"$PWD:/code\" -w /code bash:3.2 sh test/run-bats.sh"
+
+[tasks."test:bash44"]
+description = "Run the bats suite under bash 4.4 (RHEL 8)"
+dir = "{{config_root}}"
+run = "docker run --rm -v \"$PWD:/code\" -w /code bash:4.4 sh test/run-bats.sh"
+
+[tasks."test:bash53"]
+description = "Run the bats suite under bash 5.3 (latest)"
+dir = "{{config_root}}"
+run = "docker run --rm -v \"$PWD:/code\" -w /code bash:5.3 sh test/run-bats.sh"

@@ -1,0 +1,9 @@
+- id: mise-lock
+  name: mise lock
+  description: Update mise lockfiles when mise configuration changes
+  stages: [pre-commit]
+  entry: ./mise-lock.sh
+  language: unsupported_script
+  files: (^|/)(\.config/mise/conf\.d/[^/]+\.toml|(\.config/)?(\.?mise/config|mise)(\.[^/]+)?\.toml)$
+  exclude: ^(?!.*conf\.d/[^/]+\.local\.toml$).*\.local\.toml$
+  pass_filenames: true

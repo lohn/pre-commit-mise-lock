@@ -1,0 +1,36 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "*.sh"
+      - "**/*.sh"
+      - "test/**"
+      - ".github/workflows/test.yaml"
+  pull_request:
+    paths:
+      - "*.sh"
+      - "**/*.sh"
+      - "test/**"
+      - ".github/workflows/test.yaml"
+
+jobs:
+  bats:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 3.2 = macOS's bash (and the pre-4.4 `set -u` behavior);
+        # 4.4 = RHEL 8;
+        # 5.3 = latest (representative of all bash 5.x).
+        bash: ["3.2", "4.4", "5.3"]
+    name: bats (bash ${{ matrix.bash }})
+    steps:
+      # https://github.com/marketplace/actions/checkout
+      - name: Checkout repository
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      - name: Run bats tests
+        # language=bash
+        run: |
+          docker run --rm -v "$PWD:/code" -w /code "bash:${{ matrix.bash }}" sh test/run-bats.sh

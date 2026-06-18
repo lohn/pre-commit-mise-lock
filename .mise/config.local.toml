@@ -1,0 +1,6 @@
+# Dummy file for the pre-commit hook.
+#
+# `*.local.toml` configs are excluded from the `mise-lock` hook, so this file
+# exists only to verify that the hook's `exclude` pattern actually filters it
+# out (it satisfies the repo's `check-useless-excludes` meta hook).
+# It is intentionally not locked.
