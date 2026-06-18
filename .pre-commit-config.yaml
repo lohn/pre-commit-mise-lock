@@ -22,18 +22,13 @@ repos:
     hooks:
       - id: actionlint-system
 
-  - repo: local
+  - repo: https://github.com/lohn/pre-commit-mise-lock
+    rev: v0.1.0
     hooks:
       - id: mise-lock
-        name: mise lock
-        description: Update mise lockfiles when mise configuration changes
-        stages: [pre-commit]
-        entry: ./mise-lock.sh
-        language: unsupported
-        files: (^|/)(\.config/mise/conf\.d/[^/]+\.toml|(\.config/)?(\.?mise/config|mise)(\.[^/]+)?\.toml)$
-        exclude: ^(?!.*conf\.d/[^/]+\.local\.toml$).*\.local\.toml$
-        pass_filenames: true
 
+  - repo: local
+    hooks:
       - id: dprint-format
         name: dprint format
         description: Format using dprint
