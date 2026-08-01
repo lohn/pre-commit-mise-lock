@@ -2,7 +2,7 @@
 actionlint = "1"
 dprint = "0"
 node = "24"
-"npm:renovate" = "43"
+"npm:renovate" = "44"
 "pipx:commitizen" = "4"
 prek = "0.4"
 uv = "0.11"
