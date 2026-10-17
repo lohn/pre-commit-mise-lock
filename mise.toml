@@ -4,7 +4,7 @@ dprint = "0"
 node = "24"
 "npm:renovate" = "43"
 "pipx:commitizen" = "4"
-prek = "0.4"
+prek = "0.4.5"
 uv = "0.11"
 
 [settings]
